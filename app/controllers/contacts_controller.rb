@@ -8,6 +8,7 @@ class ContactsController < ApplicationController
 		@contact = Contact.new(secure_params)
 		if @contact.valid?
 			@contact.update_spreadsheet
+			UserMailer.contact_email(@contact).deliver
 			#TODO save data
 			#TODO save message
 			flash[:notice] = "Messgae sent from #{@contact.name}."
